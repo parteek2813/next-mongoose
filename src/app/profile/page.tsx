@@ -10,7 +10,7 @@ function ProfilePage() {
   const router = useRouter();
   const logout = async () => {
     try {
-      const response = await axios.post("/api/users/logout");
+      const response = await axios.get("/api/users/logout");
       console.log(response);
       toast.success("Logout successful");
       router.push("/login");
