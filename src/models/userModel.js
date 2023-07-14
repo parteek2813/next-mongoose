@@ -1,4 +1,4 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -16,11 +16,11 @@ const userSchema = new mongoose.Schema({
     required: [true, "Please provide a password"],
   },
   isVerified: {
-    type: boolean,
+    type: Boolean,
     default: false,
   },
   isAdmin: {
-    type: boolean,
+    type: Boolean,
     default: false,
   },
   forgetPasswordToken: String,
