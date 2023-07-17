@@ -45,16 +45,23 @@ export default function VerifyEmailPage() {
   useEffect(() => {
     const verifyToken = async () => {
       try {
-        await axios.get("/api/users/password", { params: { token, password } });
+        const response = await axios.get("/api/users/password", {
+          params: { token, password },
+        });
+        console.log(response);
         setTokenVerified(true);
       } catch (error: any) {
         setError(true);
       }
     };
 
+    console.log(tokenVerified);
+    console.log(passwordUpdated);
+
     // verify the token only if length greater than 0
     if (token.length > 0) {
       verifyToken();
+      console.log("Verify token working");
     }
   }, [token, password]);
 

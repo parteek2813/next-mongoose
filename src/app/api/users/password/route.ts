@@ -12,20 +12,24 @@ export async function GET(
   try {
     // find the token and password
     const token = request.nextUrl.searchParams.get("token");
+    console.log("token from pass route ", token);
     const password = request.nextUrl.searchParams.get("password");
 
     // find with the token and password in db
     const user = await User.findOne({
-      forgotPasswordToken: token,
-      forgotPasswordTokenExpiry: { $gt: Date.now() },
+      forgetPasswordToken: token,
+      forgetPasswordTokenExpiry: { $gt: Date.now() },
     });
 
     // if user found
     if (user) {
+      console.log("user has been found");
       return NextResponse.json({
         message: "Correct Token",
         success: true,
       });
+    } else {
+      console.log("user has not been found");
     }
 
     // else return invalid token error
@@ -59,8 +63,8 @@ export async function POST(request: NextRequest) {
 
     // update the fields in the db too with new password
     user.password = hashedPassword;
-    user.forgotPasswordToken = undefined;
-    user.forgotPasswordTokenExpiry = undefined;
+    user.forgetPasswordToken = undefined;
+    user.forgetPasswordTokenExpiry = undefined;
     await user.save();
 
     // password updated successfully

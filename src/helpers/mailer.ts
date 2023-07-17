@@ -6,6 +6,8 @@ import User from "@/models/userModel";
 import bcryptjs from "bcryptjs";
 
 const DOMAIN = "http://localhost:3000";
+const GMAIL_USER = "samplesm46@gmail.com";
+const GMAIL_PASSWORD = "ifnytivhfjxmrepp";
 
 export const sendEmail = async ({ email, emailType, userId }: any) => {
   try {
@@ -27,11 +29,12 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
 
     //  make transporter for mails
     var transport = nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
       auth: {
-        user: "aebb734894c1d8",
-        pass: "add19234be83f7",
+        user: GMAIL_USER,
+        pass: GMAIL_PASSWORD,
         // TODO: add these credentials to .env
       },
     });
