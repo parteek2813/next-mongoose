@@ -69,7 +69,7 @@ function LoginPage() {
         {buttonDisabled ? "No Login" : "Login"}
       </button>
       <Link href="/signup">Visit Signup page </Link>
-      <Link className="py-2" href="/forgotpassword">
+      <Link className="py-2" href="/resetpassword">
         Forgot password?
       </Link>
     </div>
