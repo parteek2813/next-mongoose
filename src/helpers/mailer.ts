@@ -4,15 +4,15 @@
 import nodemailer from "nodemailer";
 import User from "@/models/userModel";
 import bcryptjs from "bcryptjs";
+import dotenv from "dotenv";
 
-const DOMAIN = "http://localhost:3000";
-const GMAIL_USER = "samplesm46@gmail.com";
-const GMAIL_PASSWORD = "ifnytivhfjxmrepp";
+dotenv.config();
 
 export const sendEmail = async ({ email, emailType, userId }: any) => {
   try {
     // create a hashed token
     const hashedToken = await bcryptjs.hash(userId.toString(), 10);
+    console.log(process.env.GMAIL_USER);
 
     //  Verification based on Email Type
     if (emailType === "VERIFY") {
@@ -33,8 +33,8 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
       port: 465,
       secure: true,
       auth: {
-        user: GMAIL_USER,
-        pass: GMAIL_PASSWORD,
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASSWORD,
         // TODO: add these credentials to .env
       },
     });
@@ -47,13 +47,13 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
         emailType === "VERIFY" ? "Verify your email" : "Reset your password",
       html:
         emailType === "VERIFY"
-          ? `<p>Click <a href="${DOMAIN}/verifyemail?token=${hashedToken}">here</a> 
+          ? `<p>Click <a href="${process.env.DOMAIN}/verifyemail?token=${hashedToken}">here</a> 
       to verify your email or copy and paste the link below in your browser. 
-      <br> ${DOMAIN}/verifyemail?token=${hashedToken}
+      <br> ${process.env.DOMAIN}/verifyemail?token=${hashedToken}
       </p>`
-          : `<p>Click <a href="${DOMAIN}/password?token=${hashedToken}">here</a> 
+          : `<p>Click <a href="${process.env.DOMAIN}/password?token=${hashedToken}">here</a> 
       to reset your password or copy and paste the link below in your browser. 
-      <br> ${DOMAIN}/password?token=${hashedToken}
+      <br> ${process.env.DOMAIN}/password?token=${hashedToken}
       </p>`,
     };
 
