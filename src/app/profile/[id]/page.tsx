@@ -1,6 +1,12 @@
+"use client";
+
 import React from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 function UserProfile({ params }: any) {
+  const router = useRouter();
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <h1 className="text-4xl sm:text-6xl text-center font-bold">Profile</h1>
@@ -13,6 +19,10 @@ function UserProfile({ params }: any) {
           {params.id}
         </span>
       </p>
+
+      <Link href={`/profile`} className="font-bold text-3xl mt-[15px]">
+        Back
+      </Link>
     </div>
   );
 }
