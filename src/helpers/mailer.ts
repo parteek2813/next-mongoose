@@ -8,6 +8,8 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+const DOMAIN = "https://authnextjs-mongo.vercel.app";
+
 export const sendEmail = async ({ email, emailType, userId }: any) => {
   try {
     // create a hashed token
@@ -47,13 +49,13 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
         emailType === "VERIFY" ? "Verify your email" : "Reset your password",
       html:
         emailType === "VERIFY"
-          ? `<p>Click <a href="${process.env.DOMAIN}/verifyemail?token=${hashedToken}">here</a> 
+          ? `<p>Click <a href="${DOMAIN}/verifyemail?token=${hashedToken}">here</a> 
       to verify your email or copy and paste the link below in your browser. 
-      <br> ${process.env.DOMAIN}/verifyemail?token=${hashedToken}
+      <br> ${DOMAIN}/verifyemail?token=${hashedToken}
       </p>`
-          : `<p>Click <a href="${process.env.DOMAIN}/password?token=${hashedToken}">here</a> 
+          : `<p>Click <a href="${DOMAIN}/password?token=${hashedToken}">here</a> 
       to reset your password or copy and paste the link below in your browser. 
-      <br> ${process.env.DOMAIN}/password?token=${hashedToken}
+      <br> ${DOMAIN}/password?token=${hashedToken}
       </p>`,
     };
 
