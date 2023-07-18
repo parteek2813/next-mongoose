@@ -35,9 +35,11 @@ function LoginPage() {
       const response = await axios.post("/api/users/login", user);
       toast.success("Login success");
       setButtonText("Login success");
-      setTimeout(() => {
-        router.push("/profile"); // after login success, go to profile page
-      }, 100);
+      router.push("/profile");
+      console.log("After profile push");
+      // setTimeout(() => {
+      //    // after login success, go to profile page
+      // }, 100);
     } catch (error: any) {
       console.log("Login failed", error.message);
       setDisplayPassErr(true);

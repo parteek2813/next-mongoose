@@ -2,9 +2,11 @@
 
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 export default function VerifyEmailPage() {
+  const router = useRouter();
   const [token, setToken] = useState("");
   const [password, setPassword] = useState("");
   const [tokenVerified, setTokenVerified] = useState(false);
@@ -63,6 +65,14 @@ export default function VerifyEmailPage() {
       verifyToken();
     }
   }, [token, password]);
+
+  useEffect(() => {
+    if (passwordUpdated) {
+      setTimeout(() => {
+        router.push("/login");
+      }, 3000);
+    }
+  }, [passwordUpdated]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
