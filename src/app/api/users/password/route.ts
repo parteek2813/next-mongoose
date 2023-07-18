@@ -45,8 +45,8 @@ export async function POST(request: NextRequest) {
 
     // check if user exists already or not
     const user = await User.findOne({
-      forgotPasswordToken: token,
-      forgotPasswordTokenExpiry: { $gt: Date.now() },
+      forgetPasswordToken: token,
+      forgetPasswordTokenExpiry: { $gt: Date.now() },
     });
 
     //  if user not found

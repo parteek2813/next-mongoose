@@ -17,12 +17,16 @@ export default function VerifyEmailPage() {
   const updatePassword = async () => {
     try {
       setLoading(true);
-      await axios.post("/api/users/password", { token, password });
+      await axios.post("/api/users/password", {
+        token,
+        password,
+      });
       setPasswordUpdated(true);
       setLoading(false);
     } catch (error: any) {
       setError(error);
       setLoading(false);
+      console.log("error occurred in password update");
     }
   };
 
@@ -48,20 +52,15 @@ export default function VerifyEmailPage() {
         const response = await axios.get("/api/users/password", {
           params: { token, password },
         });
-        console.log(response);
         setTokenVerified(true);
       } catch (error: any) {
         setError(true);
       }
     };
 
-    console.log(tokenVerified);
-    console.log(passwordUpdated);
-
     // verify the token only if length greater than 0
     if (token.length > 0) {
       verifyToken();
-      console.log("Verify token working");
     }
   }, [token, password]);
 
