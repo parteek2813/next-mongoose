@@ -14,7 +14,7 @@ export function middleware(request: NextRequest) {
   }
 
   // if the path is not public and token is also not there, then redirect to login page
-  if (!isPublicPath && !token) {
+  if (!isPublicPath && token) {
     return NextResponse.redirect(new URL("/login", request.nextUrl));
   }
 }
